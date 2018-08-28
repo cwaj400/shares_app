@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Finance App</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header>
+    <div class="option" id="close">X</div>
+    <div class="option" id="minimize">-</div>
+</header>
+<div class="row">
+    <div id="price-container">
+        <p class="subtext">Current USD/BTC</p>
+        <h1 id="price">Loading...</h1>
+    </div>
+    <div id="goal-container">
+        <p><img src="../assets/images/up.svg"><span id="targetPrice">Choose a target price</span></p>
+    </div>
+    <div id="right-container">
+        <button id="notifyBtn">Notify me when...</button>
+    </div>
+</div>
+<script src="../handlers/win-handle.js"></script>
+</body>
+</html>
+
