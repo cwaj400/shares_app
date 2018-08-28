@@ -1,0 +1,36 @@
+
+
+header {
+    -webkit-app-region: drag;
+    display: flex;
+    flex-direction: row-reverse;
+    background: #353535;
+    justify-content: flex-start;
+    align-self: stretch;
+    padding: 2px;
+
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    background: black;
+    align-items: center;
+    color: white;
+    min-width: 150px;
+    min-height: 150px;
+}
+
+.option:hover {
+    background: red;
+}
+
+.option {
+    color: wheat;
+    padding: 10px 25px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+}
+

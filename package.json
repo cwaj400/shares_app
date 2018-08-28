@@ -1,0 +1,17 @@
+{
+  "name": "simple-shares",
+  "version": "1.0.0",
+  "description": "app that tracks stocks",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "electron-fetch": "^1.2.1",
+    "jquery": "^3.3.1",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "electron": "^2.0.8"
+  }
+}
