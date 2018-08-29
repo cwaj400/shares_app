@@ -37,22 +37,40 @@ $('#close').click(function () {
 });
 
 
-getBTC = () => {
-    axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD')
+
+
+getExchange = () => {
+    axios.get('https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=GBP&to_currency=USD&apikey=WL1I2IGZAZKHBXBP')
         .then(res => {
-            const cryptos = res.data.BTC.USD;
-            price.innerHTML = '$' + cryptos.toLocaleString('en');
-            if (targetPrice.innerHTML != '' && targetPriceVal < res.data.BTC.USD) {
+            var data = res.data["Realtime Currency Exchange Rate"];
+            console.log(data);
+
+            var result = data["5. Exchange Rate"];
+
+            var asNumber = result.toLocaleString('en');
+
+            var roundedNum = precise_round(asNumber, 3);
+
+            price.innerHTML = '$' + roundedNum;
+            if (targetPrice.innerHTML != '' && targetPriceVal >= roundedNum) {
                 const note = new Notification(notification.body, {
                     title: notification.title,
                     message: notification.body,
-                    icon: "http://orig07.deviantart.net/d754/f/2011/132/e/4/google_chrome_icon_yellow_by_cameronsagey-d3g75gy.png"
+                    icon: "btc.png"
                 });
             }
         })
 };
-getBTC();
-setInterval(getBTC, 10000);
+
+precise_round = (num, dec) => {
+
+    var num_sign = num >= 0 ? 1 : -1;
+
+    return (Math.round((num * Math.pow(10, dec)) + (num_sign * 0.0001)) / Math.pow(10, dec)).toFixed(dec);
+};
+
+getExchange();
+setInterval(getExchange, 30000);
 
 
 ipc.on('targetPriceVal', function (event, arg) {

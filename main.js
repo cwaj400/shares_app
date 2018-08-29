@@ -1,11 +1,14 @@
-const {app, BrowserWindow, Menu} = require('electron');
+const {app, BrowserWindow, Menu, Tray} = require('electron');
 const shell = require('electron').shell;
 const ipc = require('electron').ipcMain;
-
+const electron = require('electron');
+const path = require('path');
+const assetsDirectory = path.join(__dirname, 'assets');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
+let tray;
 
 function createWindow() {
     // Create the browser window.
@@ -16,6 +19,7 @@ function createWindow() {
         minHeight: 200,
         minWidth: 950,
     });
+
 
     // and load the index.html of the app.
     win.loadFile('src/index.html');
@@ -33,6 +37,9 @@ function createWindow() {
     setMenu();
 }
 
+//WL1I2IGZAZKHBXBP
+
+
 function setMenu() {
     var menu = Menu.buildFromTemplate(([
         {
@@ -40,8 +47,8 @@ function setMenu() {
             submenu: [
                 {label: 'Adjust notification value'},
                 {
-                    label: 'CoinMarketCap', accelerator: 'Cmd+C', click() {
-                        shell.openExternal('https://coinmarketcap.com/')
+                    label: 'Yahoo Finance', accelerator: 'Cmd+Y', click() {
+                        shell.openExternal('https://yhoo.it/2olc5CH')
                     }
                 },
                 {type: 'separator'},
@@ -61,10 +68,19 @@ function setMenu() {
 }
 
 
+createTray = () => {
+    tray = new Tray('btc.png');
+};
+
+
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
+app.on('ready', () => {
+    createTray();
+    createWindow()
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
