@@ -6,6 +6,7 @@ const path = require('path');
 const BrowserWindow = remote.BrowserWindow;
 const notifyBtn = document.getElementById('notifyBtn');
 const ipc = electron.ipcRenderer;
+const EXCHANGE_INTERVAL = 100000;
 
 var price = document.querySelector('h1');
 var targetPrice = document.getElementById('targetPrice');
@@ -49,9 +50,11 @@ getExchange = () => {
 
             var asNumber = result.toLocaleString('en');
 
-            var roundedNum = precise_round(asNumber, 3);
+            var roundedNum = precise_round(asNumber, 5);
 
             price.innerHTML = '$' + roundedNum;
+            console.log('goal: ' + targetPriceVal);
+            console.log('actual: ' + roundedNum);
             if (targetPrice.innerHTML != '' && targetPriceVal >= roundedNum) {
                 const note = new Notification(notification.body, {
                     title: notification.title,
@@ -70,7 +73,7 @@ precise_round = (num, dec) => {
 };
 
 getExchange();
-setInterval(getExchange, 30000);
+setInterval(getExchange, EXCHANGE_INTERVAL);
 
 
 ipc.on('targetPriceVal', function (event, arg) {
