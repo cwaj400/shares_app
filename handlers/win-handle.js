@@ -50,7 +50,7 @@ getExchange = () => {
 
             var asNumber = result.toLocaleString('en');
 
-            var roundedNum = precise_round(asNumber, 5);
+            var roundedNum = precise_round(asNumber, 3);
 
             price.innerHTML = '$' + roundedNum;
             console.log('goal: ' + targetPriceVal);
