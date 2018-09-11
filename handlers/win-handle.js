@@ -15,8 +15,8 @@ var result;
 var targetPriceVal;
 
 const notification = {
-    title: 'BTC Alert',
-    body: 'BTC reached your target'
+    title: 'GBP/USD Trade Alert',
+    body: 'Trade price dropped to target'
 };
 
 notifyBtn.addEventListener('click', function (event) {
@@ -38,8 +38,6 @@ $('#close').click(function () {
 });
 
 
-
-
 getExchange = () => {
     axios.get('https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=GBP&to_currency=USD&apikey=WL1I2IGZAZKHBXBP')
         .then(res => {
@@ -55,11 +53,11 @@ getExchange = () => {
             price.innerHTML = '$' + roundedNum;
             console.log('goal: ' + targetPriceVal);
             console.log('actual: ' + roundedNum);
-            if (targetPrice.innerHTML != '' && targetPriceVal >= roundedNum) {
+            if (targetPrice.innerHTML != '' && (targetPriceVal * 10000) <= (roundedNum * 10000)) {
                 const note = new Notification(notification.body, {
                     title: notification.title,
                     message: notification.body,
-                    icon: "btc.png"
+                    icon: "../assets/images/btc.png"
                 });
             }
         })

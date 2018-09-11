@@ -25,7 +25,7 @@ function createWindow() {
     win.loadFile('src/index.html');
 
     // Open the DevTools.
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
 
     // Emitted when the window is closed.
     win.on('closed', () => {
@@ -45,7 +45,6 @@ function setMenu() {
         {
             label: 'Menu',
             submenu: [
-                {label: 'Adjust notification value'},
                 {
                     label: 'Yahoo Finance', accelerator: 'Cmd+Y', click() {
                         shell.openExternal('https://yhoo.it/2olc5CH')
@@ -69,7 +68,8 @@ function setMenu() {
 
 
 // createTray = () => {
-//     tray = new Tray('btc.png');
+//     tray = new Tray('../assets/images/btc.png');
+//     tray.setToolTip('Getting market price...');
 // };
 
 
